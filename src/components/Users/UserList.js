@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./UserList.module.css";
 import User from "./User";
 import Card from "../UI/Card"
 
