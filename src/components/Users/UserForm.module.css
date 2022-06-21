@@ -1,0 +1,28 @@
+
+.user-form__inputs input {
+  width: 100%;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.user-form__inputs label {
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+.user-form__button button {
+  width: auto;
+  background-color: #762e62;
+  color: white;
+  padding: 5px 15px;
+  margin: 2px 0;
+  border: none;
+  cursor: pointer;
+}
+
+.user-form__button button:hover {
+  background-color: #8c4f7b;
+}
