@@ -2,25 +2,29 @@ import React from "react";
 import styles from "./UserForm.module.css";
 import Card from "../UI/Card";
 import ErrorModal from "../UI/ErrorModal";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const UserForm = (props) => {
   const [error, setError] = useState(false);
   const [errorTitle, setErrorTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [enteredUsername, setEnteredUsername] = useState("");
-  const [enteredAge, setEnteredAge] = useState(1);
+
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
+
   //On submitting the user form (when the add user button is clicked)
   const newUserEntry = (event) => {
     event.preventDefault();
+    const enteredUsername = nameInputRef.current.value;
+    const enteredAge = ageInputRef.current.value;
     if (enteredUsername.trim().length !== 0 && enteredAge >= 0) {
       const user = {
         username: enteredUsername,
         age: enteredAge,
       };
       props.onSubmitting(user);
-      setEnteredAge(0);
-      setEnteredUsername("");
+      ageInputRef.current.value = 0;
+      nameInputRef.current.value = "";
     }
     if (enteredUsername.trim().length === 0) {
       errorInstance("Username missing", "Please enter a valid username!");
@@ -42,7 +46,7 @@ const UserForm = (props) => {
 
   //jsx form
   return (
-    <div>
+    <>
       {error ? (
         <ErrorModal
           title={errorTitle}
@@ -56,23 +60,13 @@ const UserForm = (props) => {
       <Card>
         <form onSubmit={newUserEntry}>
           <div className={styles["user-form__inputs"]}>
-            <label htmlFor="name">Username</label>
-            <input
-              type="text"
-              value={enteredUsername}
-              id="name"
-              onChange={(e) => setEnteredUsername(e.target.value)}
-            />
+            <label htmlFor="username">Username</label>
+            <input type="text" id="username" ref={nameInputRef} />
           </div>
 
           <div className={styles["user-form__inputs"]}>
             <label htmlFor="Age">Age (Years)</label>
-            <input
-              type="number"
-              value={enteredAge}
-              id="Age"
-              onChange={(e) => setEnteredAge(e.target.value)}
-            />
+            <input type="number" id="Age" ref={ageInputRef} />
           </div>
 
           <div className={styles["user-form__button"]}>
@@ -80,7 +74,7 @@ const UserForm = (props) => {
           </div>
         </form>
       </Card>
-    </div>
+    </>
   );
 };
 

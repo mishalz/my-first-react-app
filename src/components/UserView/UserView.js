@@ -17,10 +17,10 @@ const UserView = () => {
   };
 
   return (
-    <div className={styles["user-view"]}>
+    <>
       <UserForm onSubmitting={getNewUserData} />
       <UserList userlist={users} />
-    </div>
+    </>
   );
 };
 export default UserView;
