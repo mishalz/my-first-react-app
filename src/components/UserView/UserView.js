@@ -1,6 +1,5 @@
 import UserForm from "../Users/UserForm";
 import UserList from "../Users/UserList";
-import styles from "./UserView.module.css";
 import { useState } from "react";
 
 const UserView = () => {
